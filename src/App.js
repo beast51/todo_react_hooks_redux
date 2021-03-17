@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Items from "./Components/Items";
 import Input from "./Components/Input";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,11 +14,11 @@ import {
 } from "./redux/actions";
 
 function App() {
-  const [itemTodoText, setItemTodoText] = useState("");
   const todos = useSelector((state) => state.todoList.todoList);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('useEffect')
     dispatch(setTodoToLS())
   }, [dispatch, todos])
 
@@ -56,7 +56,7 @@ function App() {
         className="todo__input"
         placeholder="Введите название дела"
         onEnter={addTodoElement}
-        value={itemTodoText}
+        value=''
       />
       <div className="todo-out">
         <p className="todo-out__title">
@@ -64,8 +64,6 @@ function App() {
         </p>
         <Items
           todos={todos}
-          itemTodoText={itemTodoText}
-          setItemTodoText={setItemTodoText}
           deleteTodo={deleteTodoElement}
           completeTodo={completeTodo}
           editTodoToggler={editTodoToggler}

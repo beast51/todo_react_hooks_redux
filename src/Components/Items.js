@@ -9,8 +9,6 @@ function Items(props) {
           <Item
             key={item.id}
             item={item}
-            itemTodoText={props.itemTodoText}
-            setItemTodoText={props.setItemTodoText}
             deleteTodo={props.deleteTodo}
             completeTodo={props.completeTodo}
             editTodoToggler={props.editTodoToggler}
