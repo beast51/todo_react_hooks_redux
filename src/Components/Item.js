@@ -35,7 +35,6 @@ function Item(props) {
           props.deleteTodo(props.item.id);
         }}
       >
-        {" "}
         Удалить
       </button>
     </li>

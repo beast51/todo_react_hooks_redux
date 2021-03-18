@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 function Input(props) {
-  const [inputValue, setInputValue] = useState("" || props.value);
-
+  const [inputValue, setInputValue] = useState(props.value || '');
   const onKeyPressHandler = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       props.onEnter(inputValue);

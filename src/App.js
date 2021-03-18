@@ -2,7 +2,7 @@ import React from "react";
 import Items from "./Components/Items";
 import Input from "./Components/Input";
 import { useSelector, useDispatch } from "react-redux";
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import "./App.css";
 import {
   addTodo,
@@ -17,10 +17,30 @@ function App() {
   const todos = useSelector((state) => state.todoList.todoList);
   const dispatch = useDispatch();
 
+  const titleCreator = () => {
+    let activeTask = 0;
+    todos.forEach((todo) => {
+      if (todo.completed === false) {
+        activeTask++;
+      }
+    })
+    let lastDigit = +activeTask.toString().slice(-1);
+    if (lastDigit === 1 && activeTask !== 11) {
+      return `у Вас ${activeTask} задание`;
+    } else if (![12,13,14].includes(activeTask) && lastDigit > 1 && lastDigit < 5) {
+      return `у Вас ${activeTask} задания`
+    } else {
+      return `у Вас ${activeTask} заданий`
+    }
+  }
+
   useEffect(() => {
-    console.log('useEffect')
-    dispatch(setTodoToLS())
+    dispatch(setTodoToLS());
   }, [dispatch, todos])
+
+  useEffect(() => {
+    document.title = titleCreator();
+  })
 
   const addTodoElement = (text) => {
     dispatch(
@@ -56,7 +76,6 @@ function App() {
         className="todo__input"
         placeholder="Введите название дела"
         onEnter={addTodoElement}
-        value=''
       />
       <div className="todo-out">
         <p className="todo-out__title">
